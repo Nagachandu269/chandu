@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+           /* background-color: green; */
+           background-image: url('./images/snow.jpg');
+           background-size: cover;
+           background-repeat: no-repeat;
+           width:400px;
+           
+        }
+        .container2{
+            
+            color: white;
+            border: 20px ;
+            display: flex;
+            position:relative ;
+            left: 550px;
+            top: 150px;
+            
+            
+            
+        }
+        h6{
+            height: 20px;
+            width: 100px;
+            border: 2px solid;
+            align-items: center;
+            text-align: center;
+            background-color: rgb(228, 228, 237);
+            justify-content: space-evenly;
+            margin: 5px;
+            border-radius: 20px;
+            color: black;
+            border: 1px solid rgb(228, 228, 237);
+
+        }
+
+        .container1{
+            
+            color: white;
+            border: 20px ;
+            display: flex;
+            position: relative;
+            left: 550px;
+            top: 170px;
+            
+            
+            
+        }
+        h1{
+            height: 80px;
+            width: 100px;
+            border: 2px solid;
+            align-items: center;
+            text-align: center;
+            background-color: rgb(228, 228, 237);
+            justify-content: space-evenly;
+            margin: 5px;
+            font-size:50px;
+            color: black;
+            border-radius: 20px;
+            border: 1px solid white;
+        }
+        h3{
+            color:black;
+            position: relative;
+            left: 620px;
+            top: 150px;
+            font-size: 20px;
+        }
+        h2{
+            font-size:30px;
+            color: black;
+        }
+
+
+    </style>
+</head>
+<body>
+    <h3>DIGITAL CLOCK</h3>
+    <div class="container1">
+        <h1 id="hour">11</h1>
+        <h1 id="minute">11</h1>
+        <h1 id="second">11</h1>
+        <h2 ID="am">AM</h2>
+    </div>
+    <div class="container2">
+        <h6>HOURS</h6>
+        <h6>MINUTES</h6>
+        <h6>SECONDS</h6>
+
+    </div>
+
+
+
+    <script>
+        const time = ()=>{
+            var date = new Date();
+            var hours = date.getHours();
+            var min = date.getMinutes();
+            var sec = date.getSeconds();
+             
+            
+
+            document.getElementById('hour').innerHTML=hours;
+            document.getElementById('minute').innerHTML=min;
+            document.getElementById('second').innerHTML=sec;
+            if(hours<=12){
+                document.getElementById('am').innerHTML='AM';
+            }
+            else{
+                document.getElementById('am').innerHTML='PM';
+            }
+            
+        }
+
+
+        setInterval(()=>{
+            time()
+        },1000);
+
+        
+
+        
+
+
+    </script>
+
+</body>
+</html>
