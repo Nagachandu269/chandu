@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do</title>
+
+    <style>
+        .container {
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0.1px 0.1px 5px blue, -0.2px -0.2px 5px blue;
+            max-width: 400px;
+            margin: auto;
+        }
+        img {
+            height: 30px;
+            width: 30px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            text-align: center;
+        }
+        #text {
+            height: 30px;
+            border-radius: 10px;
+            width: 200px;
+        }
+        #plus {
+            height: 30px;
+            width: 40px;
+            background: rgb(6, 198, 64);
+            border-radius: 10px;
+            color: rgb(35, 78, 196);
+            font-weight: 1000;
+            font-size: medium;
+        }
+        .task-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid grey;
+            border-radius: 10px;
+            margin-top: 10px;
+            box-shadow: 2px 2px 5px rgba(74, 73, 73, 0.2);
+        }
+        .task-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .task-buttons button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .task-text {
+            margin: 0;
+            padding: 0;
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My To-do-List <img src="./to-do-list (1).png" alt="to do text"></h1>
+
+        <form>
+            <input type="text" placeholder="Enter your notes here" class="text" id="text" name="text">
+            <input type="button" value="+" class="plus" id="plus" name="submit">
+        </form>
+    </div>
+
+    <script>
+        const text = document.getElementById('text');
+        const plus = document.getElementById('plus');
+        const border = document.getElementsByClassName('container')[0];
+
+        plus.addEventListener('click', function () {
+            // Trim the input value to remove extra spaces
+            let trimmedText = text.value.trim();
+
+            // If input is empty, do nothing
+            if (trimmedText === "") {
+                return;
+            }
+
+            // Create a new task container div
+            let div = document.createElement('div');
+            div.className = 'task-container';
+
+            // Create a h1 element for the task text
+            let taskText = document.createElement('h1');
+            taskText.className = 'task-text';
+            let txtNode = document.createTextNode(trimmedText);
+            taskText.appendChild(txtNode);
+            div.appendChild(taskText);
+
+            // Create a button container for the task action buttons
+            let buttonContainer = document.createElement('div');
+            buttonContainer.className = 'task-buttons';
+
+            // 'ok' button (mark as completed, toggle strikethrough)
+            let ok = document.createElement('button');
+            let image1 = document.createElement('img');
+            image1.setAttribute('src', './check-mark.png');
+            image1.setAttribute('alt', 'tick mark icon');
+            ok.appendChild(image1);
+            buttonContainer.appendChild(ok);
+            ok.addEventListener('click', function () {
+                // Toggle strikethrough on and off
+                if (taskText.style.textDecoration === 'line-through') {
+                    taskText.style.textDecoration = 'none';
+                } else {
+                    taskText.style.textDecoration = 'line-through';
+                }
+            });
+
+            // 'edit' button (edit the task)
+            let edit = document.createElement('button');
+            let image2 = document.createElement('img');
+            image2.setAttribute('src', './pen.png');
+            image2.setAttribute('alt', 'edit icon');
+            edit.appendChild(image2);
+            buttonContainer.appendChild(edit);
+            edit.addEventListener('click', function () {
+                let newText = prompt("Edit your note:", taskText.textContent);
+                if (newText !== null && newText.trim() !== "") {
+                    taskText.textContent = newText.trim(); // Update the text with the edited content
+                }
+            });
+
+            // 'delete' button (remove the task)
+            let del = document.createElement('button');
+            let image3 = document.createElement('img');
+            image3.setAttribute('src', './delete.png');
+            image3.setAttribute('alt', 'delete icon');
+            del.appendChild(image3);
+            buttonContainer.appendChild(del);
+            del.addEventListener('click', function () {
+                div.remove(); // Remove the entire task div
+            });
+
+            // Append the button container to the task div
+            div.appendChild(buttonContainer);
+
+            // Append the new task to the container
+            border.appendChild(div);
+
+            // Clear the input field after adding the task
+            text.value = "";
+        });
+    </script>
+
+</body>
+</html>
